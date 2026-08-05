@@ -63,6 +63,248 @@
         .glow-frame:hover {
             box-shadow: 0 0 35px rgba(255, 77, 109, 0.6);
         }
+    </style>
+</head>
+<body class="relative flex flex-col items-center justify-center p-4 md:p-8 min-h-screen">
+
+    <!-- Background Floating Hearts Container -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Audio Player (Loaded directly from GitHub repository music.mp3) -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Control Floating Button -->
+    <button id="music-btn" onclick="toggleMusic()" class="fixed top-5 right-5 z-50 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg text-pink-600 transition-all duration-300 flex items-center justify-center w-12 h-12 border border-pink-200">
+        <i id="music-icon" class="fas fa-music text-xl"></i>
+    </button>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-4xl w-full my-6">
+        
+        <!-- Header Title -->
+        <div class="text-center mb-8 animate-fade-in">
+            <h1 class="text-3xl md:text-5xl poetic-title text-pink-700 tracking-wide mb-2 drop-shadow-sm">
+                <i class="fas fa-heart text-pink-500 mr-2 text-2xl md:text-4xl"></i>
+                အမှတ်တရ ရင်ခုန်သံများ
+                <i class="fas fa-heart text-pink-500 ml-2 text-2xl md:text-4xl"></i>
+            </h1>
+            <p class="text-pink-600/90 text-sm md:text-base font-semibold">
+                မြတ်နိုးရသူလေးအတွက် ရင်ထဲက အချစ်ကဗျာ
+            </p>
+        </div>
+
+        <!-- Main Card Section -->
+        <div class="glass-card rounded-3xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            
+            <!-- Photo Side (5 cols) -->
+            <div class="md:col-span-5 flex flex-col items-center">
+                
+                <input type="file" id="photo-file-input" accept="image/*" class="hidden" onchange="previewSelectedImage(event)">
+
+                <div onclick="triggerImageUpload()" class="glow-frame relative rounded-2xl overflow-hidden border-4 border-white shadow-xl bg-pink-50 max-w-xs w-full cursor-pointer group">
+                    
+                    <img id="user-image" 
+                         src="IMG-85e2164a3b2..." 
+                         onerror="handleImageFallback(this)" 
+                         alt="ညီမလေး၏ အမှတ်တရ ဓာတ်ပုံ" 
+                         class="w-full h-auto max-h-[420px] object-cover rounded-xl transition duration-300 group-hover:scale-105">
+                    
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-4 text-center">
+                        <i class="fas fa-camera text-3xl mb-2 text-pink-300"></i>
+                        <span class="text-sm font-semibold">ဓာတ်ပုံ ပြောင်းရန် နှိပ်ပါ</span>
+                    </div>
+
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-pink-900/80 via-pink-900/40 to-transparent p-4 text-center">
+                        <span class="text-white text-sm tracking-wider font-light">ဇွန်လ (၂၁) ရက်နေ့ အမှတ်တရ</span>
+                    </div>
+                </div>
+
+                <button onclick="triggerImageUpload()" class="mt-3 text-xs md:text-sm text-pink-600 hover:text-pink-800 bg-white/80 hover:bg-white px-4 py-1.5 rounded-full border border-pink-300 shadow-sm transition flex items-center gap-2">
+                    <i class="fas fa-image"></i>
+                    <span>ဓာတ်ပုံ ရွေးချယ်ရန်</span>
+                </button>
+            </div>
+
+            <!-- Poem Side (7 cols) -->
+            <div class="md:col-span-7 flex flex-col justify-center space-y-6 text-gray-800">
+                
+                <div class="space-y-4 text-base md:text-lg leading-relaxed border-l-4 border-pink-400 pl-4 md:pl-6 py-2">
+                    
+                    <p class="text-pink-700 font-bold text-lg md:text-xl">
+                        ဇွန်လရဲ့ နှစ်ဆယ့်တစ်ရက်၊
+                    </p>
+
+                    <p class="text-gray-700">
+                        ဆိုင်ကယ်လေးနဲ့ တူတူတက်ခဲ့ဖူးတဲ့ မန်းတောင်ထိပ်...<br>
+                        အဲဒီအခိုက်အတန့်မှာ ပျော်ရွှင်ခြင်းတွေ ကမ္ဘာပြည့်ခဲ့တယ်။
+                    </p>
+
+                    <p class="text-gray-700">
+                        ညီမလေး ဘေးနားမှာ ထိုင်နေရင်း<br>
+                        ပါးပြင်ပေါ်က သွေးကြောစိမ်းလေးတွေ မြင်ရတဲ့အထိ<br>
+                        စိုက်ကြည့်မိတော့ မထိန်းနိုင်အောင် ရင်ခုန်ခဲ့ရတာပေါ့။
+                    </p>
+
+                    <p class="text-gray-700">
+                        ကျုံးမြောက်ဘက် ခုံတန်းလေးမှာ<br>
+                        စကားသံတွေ တိတ်ဆိတ်သွားတဲ့အခါ၊<br>
+                        ရင်ထဲက အချစ်တွေကို ဖွင့်ဟဖို့<br>
+                        စာသားလေးနဲ့ ဝန်ခံခဲ့ဖူးတယ်...
+                    </p>
+
+                    <p class="text-pink-600 font-bold text-lg md:text-xl italic bg-pink-100/70 p-3 rounded-lg border border-pink-200 inline-block shadow-sm">
+                        "အစ်ကို... ညီမကို ချစ်တယ်"
+                    </p>
+
+                    <p class="text-gray-700">
+                        New Ocean ထဲက ဆိုင်လေးမှာ<br>
+                        ကြက်ကြော်လေးစားရင်း ပြုံးနေတဲ့ ညီမကို<br>
+                        ငေးကြည့်မိတဲ့ အချိန်တိုင်း<br>
+                        အစ်ကို့ ရင်ခုန်သံတွေက ပိုမို မြန်ဆန်လာခဲ့ရပါတယ်...
+                    </p>
+                </div>
+
+                <!-- Interactive Button -->
+                <div class="pt-2 text-center md:text-left">
+                    <button onclick="burstHearts()" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center space-x-2 mx-auto md:mx-0">
+                        <i class="fas fa-heart text-xl animate-pulse"></i>
+                        <span>ရင်ခုန်သံများ တိုးပွားစေရန် နှိပ်ပါ</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer class="mt-8 text-center text-pink-600/70 text-xs md:text-sm">
+            <p>Forever Memory • Created with Love ❤️</p>
+        </footer>
+
+    </main>
+
+    <script>
+        function triggerImageUpload() {
+            document.getElementById('photo-file-input').click();
+        }
+
+        function previewSelectedImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('user-image').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleImageFallback(img) {
+            // Try alternative standard photo file names if the exact name isn't matched
+            if (img.src.indexOf('1000085900.jpg') === -1) {
+                img.src = '1000085900.jpg';
+            } else {
+                img.onerror = null;
+                img.src = 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&q=80&w=800';
+            }
+        }
+
+        function createHeart() {
+            const container = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            const icons = ['fa-heart', 'fa-heart', 'fa-heart-pulse'];
+            const colors = ['#ff4d6d', '#ff758f', '#ff8fa3', '#c9184a', '#ffb3c1'];
+            
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            heart.innerHTML = `<i class="fas ${randomIcon}"></i>`;
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            heart.style.color = randomColor;
+
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        setInterval(createHeart, 400);
+
+        function burstHearts() {
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    createHeart();
+                }, i * 40);
+            }
+        }
+
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-music');
+                musicBtn.classList.remove('bg-pink-100');
+            } else {
+                music.play().then(() => {
+                    musicIcon.classList.remove('fa-music');
+                    musicIcon.classList.add('fa-pause');
+                    musicBtn.classList.add('bg-pink-100');
+                }).catch(err => {
+                    console.log("Audio play error: ", err);
+                });
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Auto play try on first interaction
+        document.body.addEventListener('click', function() {
+            if (!isPlaying) {
+                toggleMusic();
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.5) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Glow effect for photo frame */
+        .glow-frame {
+            box-shadow: 0 0 25px rgba(255, 77, 109, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .glow-frame:hover {
+            box-shadow: 0 0 35px rgba(255, 77, 109, 0.6);
+        }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
