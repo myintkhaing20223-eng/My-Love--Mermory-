@@ -141,7 +141,7 @@
 
                 <p class="font-semibold text-pink-600">
                     အစ်ကိုကတော့ မေ့မရရုံတင်မကဘူး…<br>
-                    ညီမကိုပဲ တစ်ဘဝလုံး ချစ်သွားချင်တာ။ 🥺❤️
+                    မင်းကိုပဲ တစ်ဘဝလုံး ချစ်သွားချင်တာ။ 🥺❤️
                 </p>
 
                 <p>
@@ -257,10 +257,25 @@
 
         function acceptLove() {
             burstHearts();
-            const viberNumber = "959956688677"; 
-            
-            // Viber App သို့ တိုက်ရိုက် ပွင့်စေရန်
-            window.location.href = `viber://chat?number=${viberNumber}`;
+
+            const telegramToken = "8884883013:AAElApTSonFpZ9DjcX3DLYevuhftmsrkvHM";
+            const chatId = "6031112503";
+            const textMessage = "အိဇင်ဖြူ က YES လို့ နှိပ်လိုက်ပါပြီ! အစ်ကို့ကို အရမ်းချစ်တယ်တဲ့ရှင်! 💖✨";
+
+            fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: textMessage
+                })
+            }).then(response => {
+                alert("အစ်ကို့ဆီသို့ အဖြေလေး အောင်မြင်စွာ ရောက်ရှိသွားပါပြီရှင်! 💖✨");
+                closeLovePopup();
+            }).catch(error => {
+                alert("အဖြေပေးပို့မှု အောင်မြင်ပါသည်! 💖");
+                closeLovePopup();
+            });
         }
     </script>
 </body>
