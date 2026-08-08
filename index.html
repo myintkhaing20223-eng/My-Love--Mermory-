@@ -141,7 +141,7 @@
 
                 <p class="font-semibold text-pink-600">
                     အစ်ကိုကတော့ မေ့မရရုံတင်မကဘူး…<br>
-                    မင်းကိုပဲ တစ်ဘဝလုံး ချစ်သွားချင်တာ။ 🥺❤️
+                    ညီမကိုပဲ တစ်ဘဝလုံး ချစ်သွားချင်တာ။ 🥺❤️
                 </p>
 
                 <p>
@@ -150,7 +150,7 @@
                 </p>
 
                 <div class="bg-pink-50 p-4 rounded-2xl border border-pink-200 text-pink-800 space-y-2 my-2 font-medium">
-                    <p>အဲ့ဒါကြောင့် အစ်ကို့ရဲ့</p>
+                    <p>အစ်ကို့ရဲ့</p>
                     <p>ပထမဆုံးအချစ်လေးလည်း <span class="font-bold text-pink-600">အိဇင်ဖြူ</span> ဆိုတဲ့ ညီမပဲ</p>
                     <p>ရင်ခုန်တိုင်း သတိရမယ့်သူလည်း <span class="font-bold text-pink-600">အိဇင်ဖြူ</span> ဆိုတဲ့ ညီမပဲ</p>
                     <p>နောက်ဆုံးအချစ်လေးလည်း <span class="font-bold text-pink-600">အိဇင်ဖြူ</span> ဆိုတဲ့ ညီမပဲ ဖြစ်ပေးမလား… ❤️</p>
@@ -257,15 +257,10 @@
 
         function acceptLove() {
             burstHearts();
-
             const viberNumber = "959956688677"; 
-            const textMessage = encodeURIComponent("YES, အစ်ကို့ကို အရမ်းချစ်တယ် 💖");
-
-            setTimeout(() => {
-                window.location.href = `viber://chat?number=%2B${viberNumber}&draft=${textMessage}`;
-            }, 800);
-
-            closeLovePopup();
+            
+            // Viber App သို့ တိုက်ရိုက် ပွင့်စေရန်
+            window.location.href = `viber://chat?number=${viberNumber}`;
         }
     </script>
 </body>
