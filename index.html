@@ -15,6 +15,9 @@
         .heart { position: absolute; font-size: 1.5rem; color: #ff4d6d; opacity: 0.8; pointer-events: none; animation: floatUp 6s linear infinite; }
         @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 1; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
         .glow-frame { box-shadow: 0 0 25px rgba(255, 77, 109, 0.35); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #ffe6ea; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ff758f; border-radius: 10px; }
     </style>
 </head>
 <body class="relative flex flex-col items-center justify-center p-4 md:p-8 min-h-screen">
@@ -102,15 +105,94 @@
                     </p>
                 </div>
 
-                <div class="pt-2 text-center md:text-left">
-                    <button onclick="burstHearts()" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all flex items-center justify-center space-x-2 mx-auto md:mx-0">
+                <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                    <button onclick="burstHearts()" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all flex items-center justify-center space-x-2">
                         <i class="fas fa-heart text-xl animate-pulse"></i>
-                        <span>ရင်ခုန်သံများ တိုးပွားစေရန် နှိပ်ပါ</span>
+                        <span>ရင်ခုန်သံများ တိုးပွားစေရန်</span>
+                    </button>
+
+                    <button onclick="openLovePopup()" class="bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all flex items-center justify-center space-x-2 border border-pink-300">
+                        <i class="fas fa-envelope-open-text text-xl"></i>
+                        <span>အချစ်ဦးလေးသို့ စာလွှာ 💌</span>
                     </button>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Love Letter Pop-up Modal -->
+    <div id="love-popup" class="fixed inset-0 bg-pink-950/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 transition-all duration-300 opacity-0">
+        <div class="bg-white/95 rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl border-2 border-pink-300 relative transform scale-90 transition-all duration-300 max-h-[85vh] flex flex-col" id="popup-content">
+            
+            <button onclick="closeLovePopup()" class="absolute top-4 right-4 bg-pink-100 text-pink-600 hover:bg-pink-200 w-9 h-9 rounded-full flex items-center justify-center font-bold transition-all z-10">
+                ✕
+            </button>
+
+            <div class="text-center mb-4 pt-2">
+                <span class="text-3xl">💌</span>
+                <h2 class="text-xl md:text-2xl font-bold text-pink-700 mt-1">အချစ်ဦးလေးရေ… ခဏလေးနားထောင်ပေးနော် 🫣❤️</h2>
+            </div>
+
+            <div class="overflow-y-auto custom-scrollbar space-y-4 pr-2 text-gray-700 text-base md:text-lg leading-relaxed text-center my-2">
+                <p>
+                    လူတွေက အချစ်ဦးဆိုတာ<br>
+                    ဘဝမှာ တစ်ခါပဲရှိပြီး မေ့လို့မရဘူးတဲ့။
+                </p>
+
+                <p class="font-semibold text-pink-600">
+                    အစ်ကိုကတော့ မေ့မရရုံတင်မကဘူး…<br>
+                    မင်းကိုပဲ တစ်ဘဝလုံး ချစ်သွားချင်တာ။ 🥺❤️
+                </p>
+
+                <p>
+                    ညီမကိုချစ်ခွင့်ပြန်ပီး နောက်ပိုင်း<br>
+                    နိုးလာတဲ့အချိန်တိုင်းလည်း အချစ်ဦးကိုပဲ ပထမဦးဆုံး သတိရနေမိတယ်။ 🙈💕
+                </p>
+
+                <div class="bg-pink-50 p-4 rounded-2xl border border-pink-200 text-pink-800 space-y-2 my-2 font-medium">
+                    <p>အဲ့ဒါကြောင့် အစ်ကို့ရဲ့</p>
+                    <p>ပထမဆုံးအချစ်လေးလည်း <span class="font-bold text-pink-600">အိဇင်ဖြူ</span> ဆိုတဲ့ ညီမပဲ</p>
+                    <p>ရင်ခုန်တိုင်း သတိရမယ့်သူလည်း <span class="font-bold text-pink-600">အိဇင်ဖြူ</span> ဆိုတဲ့ ညီမပဲ</p>
+                    <p>နောက်ဆုံးအချစ်လေးလည်း <span class="font-bold text-pink-600">အိဇင်ဖြူ</span> ဆိုတဲ့ ညီမပဲ ဖြစ်ပေးမလား… ❤️</p>
+                </div>
+
+                <p>
+                    အစ်ကို့ဘဝမှာ “ချစ်သူ” ဆိုတဲ့နေရာလေးကို<br>
+                    ဘယ်သူ့အတွက်မှ မထားထားဘူး…
+                </p>
+
+                <p class="font-semibold text-pink-600">
+                    ညီမအတွက်ပဲ သိမ်းထားတာ။ 🫶🏻
+                </p>
+
+                <p>
+                    ဒါကြောင့် အချစ်ဦးလေးရေ…<br>
+                    အစ်ကို့ရဲ့ ဒီအချစ်လေးကို လက်ခံပေးပြီး<br>
+                    ညီမဘေးမှာ အစ်ကို့ကို ချစ်သူလေးအဖြစ်<br>
+                    နေခွင့်အမြန်ပေးပလား…? 🥺❤️
+                </p>
+
+                <p class="text-pink-700 font-bold bg-pink-100/70 p-3 rounded-xl border border-pink-200">
+                    အဖြေလေးကိုတော့<br>
+                    “YES,အစ်ကို့ကို အရမ်းချစ်တယ်” လို့ပဲ ကြားချင်နေတဲ့<br>
+                    တစ်ယောက်သောသူ အစ်ကိုက<br>
+                    ရင်ခုန်ရင်း စောင့်မျှော်နေပါတယ်နော်… 🫣💗
+                </p>
+
+                <p class="italic text-gray-600 pt-1">
+                    စဉ်းစားဦးနော် အချစ်ဦးလေး…<br>
+                    အစ်ကိုကတော့ ညီမကို အရမ်းချစ်နေပြီ။ ❤️‍🩹
+                </p>
+            </div>
+
+            <div class="pt-4 text-center">
+                <button onclick="acceptLove()" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all transform active:scale-95 flex items-center justify-center space-x-2">
+                    <i class="fas fa-heart"></i>
+                    <span>YES, အစ်ကို့ကို အရမ်းချစ်တယ် 💖</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         function createHeart() {
@@ -150,6 +232,35 @@
                 toggleMusic();
             }
         }, { once: true });
+
+        // Pop-up Logic
+        function openLovePopup() {
+            const popup = document.getElementById('love-popup');
+            const content = document.getElementById('popup-content');
+            popup.classList.remove('hidden');
+            setTimeout(() => {
+                popup.classList.remove('opacity-0');
+                content.classList.remove('scale-90');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeLovePopup() {
+            const popup = document.getElementById('love-popup');
+            const content = document.getElementById('popup-content');
+            popup.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-90');
+            setTimeout(() => {
+                popup.classList.add('hidden');
+            }, 300);
+        }
+
+        function acceptLove() {
+            burstHearts();
+            alert("အစ်ကိုလည်း ညီမလေး 'အိဇင်ဖြူ' ကို အရမ်းချစ်ပါတယ်နော်... 💖✨");
+            closeLovePopup();
+        }
     </script>
 </body>
 </html>
