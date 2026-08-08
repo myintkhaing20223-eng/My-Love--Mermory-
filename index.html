@@ -174,7 +174,7 @@
 
                 <p class="text-pink-700 font-bold bg-pink-100/70 p-3 rounded-xl border border-pink-200">
                     အဖြေလေးကိုတော့<br>
-                    “YES,အစ်ကို့ကို အရမ်းချစ်တယ်” လို့ပဲ ကြားချင်နေတဲ့<br>
+                    “YES, အစ်ကို့ကို အရမ်းချစ်တယ်” လို့ပဲ ကြားချင်နေတဲ့<br>
                     တစ်ယောက်သောသူ အစ်ကိုက<br>
                     ရင်ခုန်ရင်း စောင့်မျှော်နေပါတယ်နော်… 🫣💗
                 </p>
@@ -233,7 +233,6 @@
             }
         }, { once: true });
 
-        // Pop-up Logic
         function openLovePopup() {
             const popup = document.getElementById('love-popup');
             const content = document.getElementById('popup-content');
@@ -258,7 +257,14 @@
 
         function acceptLove() {
             burstHearts();
-            alert("အစ်ကိုလည်း ညီမလေး 'အိဇင်ဖြူ' ကို အရမ်းချစ်ပါတယ်နော်... 💖✨");
+
+            const viberNumber = "959956688677"; 
+            const textMessage = encodeURIComponent("YES, အစ်ကို့ကို အရမ်းချစ်တယ် 💖");
+
+            setTimeout(() => {
+                window.location.href = `viber://chat?number=%2B${viberNumber}&draft=${textMessage}`;
+            }, 800);
+
             closeLovePopup();
         }
     </script>
