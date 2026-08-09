@@ -24,6 +24,7 @@
 
     <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
 
+    <!-- Background Music -->
     <audio id="bg-music" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
@@ -33,13 +34,20 @@
     </button>
 
     <main class="relative z-10 max-w-4xl w-full my-6">
-        <div class="text-center mb-8">
+        <div class="text-center mb-6">
             <h1 class="text-3xl md:text-5xl poetic-title text-pink-700 tracking-wide mb-2">
                 <i class="fas fa-heart text-pink-500 mr-2"></i>အမှတ်တရ ရင်ခုန်သံများ<i class="fas fa-heart text-pink-500 ml-2"></i>
             </h1>
             <p class="text-pink-600/90 text-sm md:text-base font-semibold">မြတ်နိုးရသူလေးအတွက် ရင်ထဲက အချစ်ကဗျာ</p>
         </div>
 
+        <!-- Relationship Counter -->
+        <div class="glass-card rounded-2xl p-4 mb-6 text-center shadow-md">
+            <h2 class="text-pink-600 font-bold mb-1">💘 ကျွန်တော်တို့ ချစ်သူသက်တမ်း 💘</h2>
+            <div id="counter" class="text-lg md:text-xl font-bold text-pink-700">တွက်ချက်နေပါတယ်...</div>
+        </div>
+
+        <!-- Main Content Card -->
         <div class="glass-card rounded-3xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             
             <div class="md:col-span-5 flex flex-col items-center">
@@ -195,6 +203,30 @@
     </div>
 
     <script>
+        // 1. Counter Logic
+        function updateCounter() {
+            const startDate = new Date("2026-08-09T00:00:00");
+            const now = new Date();
+            const diff = now - startDate;
+
+            if (diff < 0) {
+                document.getElementById("counter").innerHTML = "စတင်မည့်ရက်ကို စောင့်ဆိုင်းနေပါသည်...";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const months = Math.floor(days / 30);
+            const years = Math.floor(months / 12);
+
+            const remainingMonths = months % 12;
+            const remainingDays = days % 30;
+
+            document.getElementById("counter").innerHTML = `${years} နှစ်၊ ${remainingMonths} လ၊ ${remainingDays} ရက်`;
+        }
+        updateCounter();
+        setInterval(updateCounter, 1000 * 60 * 60);
+
+        // 2. Hearts Floating Animation
         function createHeart() {
             const container = document.getElementById('hearts-container');
             const heart = document.createElement('div');
@@ -211,6 +243,7 @@
         setInterval(createHeart, 400);
         function burstHearts() { for (let i = 0; i < 25; i++) { setTimeout(createHeart, i * 40); } }
 
+        // 3. Audio Control
         const music = document.getElementById('bg-music');
         const musicIcon = document.getElementById('music-icon');
         let isPlaying = false;
@@ -228,11 +261,10 @@
         }
 
         document.body.addEventListener('click', function() {
-            if (!isPlaying) {
-                toggleMusic();
-            }
+            if (!isPlaying) { toggleMusic(); }
         }, { once: true });
 
+        // 4. Pop-up Controls
         function openLovePopup() {
             const popup = document.getElementById('love-popup');
             const content = document.getElementById('popup-content');
@@ -250,29 +282,33 @@
             popup.classList.add('opacity-0');
             content.classList.remove('scale-100');
             content.classList.add('scale-90');
-            setTimeout(() => {
-                popup.classList.add('hidden');
-            }, 300);
+            setTimeout(() => { popup.classList.add('hidden'); }, 300);
         }
 
+        // 5. Telegram Integration
         function acceptLove() {
             burstHearts();
 
+            const urlParams = new URLSearchParams(window.location.search);
+            const visitorName = urlParams.get('name') || "အိဇင်ဖြူ";
+
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('my-MM', { year: 'numeric', month: 'long', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('my-MM', { hour: '2-digit', minute: '2-digit' });
+
             const telegramToken = "8884883013:AAElApTSonFpZ9DjcX3DLYevuhftmsrkvHM";
             const chatId = "6031112503";
-            const textMessage = "အိဇင်ဖြူ က YES လို့ နှိပ်လိုက်ပါပြီ! အစ်ကို့ကို အရမ်းချစ်တယ်တဲ့ရှင်! 💖✨";
+            
+            const textMessage = `💖 ဂုဏ်ယူပါတယ်!\n\nနှိပ်လိုက်သူ: ${visitorName}\nချစ်သူဖြစ်သွားသည့်နေ့: ${dateStr}\nအချိန်: ${timeStr}\n\nအဖြေ: YES, အစ်ကို့ကို အရမ်းချစ်တယ်! ✨`;
 
             fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: textMessage
-                })
-            }).then(response => {
+                body: JSON.stringify({ chat_id: chatId, text: textMessage })
+            }).then(() => {
                 alert("အစ်ကို့ဆီသို့ အဖြေလေး အောင်မြင်စွာ ရောက်ရှိသွားပါပြီရှင်! 💖✨");
                 closeLovePopup();
-            }).catch(error => {
+            }).catch(() => {
                 alert("အဖြေပေးပို့မှု အောင်မြင်ပါသည်! 💖");
                 closeLovePopup();
             });
