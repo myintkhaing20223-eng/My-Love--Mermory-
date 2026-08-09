@@ -41,18 +41,12 @@
             <p class="text-pink-600/90 text-sm md:text-base font-semibold">မြတ်နိုးရသူလေးအတွက် ရင်ထဲက အချစ်ကဗျာ</p>
         </div>
 
-        <!-- Relationship Counter -->
-        <div class="glass-card rounded-2xl p-4 mb-6 text-center shadow-md">
-            <h2 class="text-pink-600 font-bold mb-1">💘 ကျွန်တော်တို့ ချစ်သူသက်တမ်း 💘</h2>
-            <div id="counter" class="text-lg md:text-xl font-bold text-pink-700">တွက်ချက်နေပါတယ်...</div>
-        </div>
-
         <!-- Main Content Card -->
         <div class="glass-card rounded-3xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             
             <div class="md:col-span-5 flex flex-col items-center">
                 <div class="glow-frame relative rounded-2xl overflow-hidden border-4 border-white shadow-xl bg-pink-50 max-w-xs w-full">
-                    <img src="IMG-85e2164a3b2480defb3aed8dad394ad8-V.jpg" alt="ညီမလေး၏ အမှတ်တရ ဓာတ်ပုံ" class="w-full h-auto max-h-[420px] object-cover rounded-xl">
+                    <img src="IMG-85e2164a3b2480defb3aed8dad394ad8-V.jpg" alt="အမှတ်တရ ဓာတ်ပုံ" class="w-full h-auto max-h-[420px] object-cover rounded-xl">
                     <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-pink-900/80 via-pink-900/40 to-transparent p-4 text-center">
                         <span class="text-white text-sm tracking-wider font-light">ဇွန်လ (၂၁) ရက်နေ့ အမှတ်တရ</span>
                     </div>
@@ -154,14 +148,14 @@
 
                 <p>
                     ညီမကိုချစ်ခွင့်ပန်ပီး နောက်ပိုင်း<br>
-                    နိုးလာတဲ့အချိန်တိုင်းလည်း အချစ်ဦးကိုပဲ ပထမဦးဆုံး သတိရနေမိတယ်။ 🙈💕
+                    နိုးထလာတဲ့အချိန်တိုင်းလည်း အချစ်ဦးကိုပဲ ပထမဦးဆုံး သတိရနေမိတယ်။ 🙈💕
                 </p>
 
                 <div class="bg-pink-50 p-4 rounded-2xl border border-pink-200 text-pink-800 space-y-2 my-2 font-medium">
-                    <p>အစ်ကို့ရဲ့</p>
-                    <p>ပထမဆုံးအချစ်လေးလည်း <span မင်းပဲ</p>
-                    <p>ရင်ခုန်တိုင်း သတိရမယ့်သူလည်း <span class="font-bold text-pink-600">အိဇင်ဖြူ</span> ဆိုတဲ့ ညီမပဲ</p>
-                    <p>နောက်ဆုံးအချစ်လေးလည်း <span class="font-bold text-pink-600">အိဇင်ဖြူ</span> ဆိုတဲ့ ညီမပဲ ဖြစ်ပေးမလား… ❤️</p>
+                    <p>အဲ့ဒါကြောင့် အစ်ကို့ရဲ့</p>
+                    <p>ပထမဆုံးအချစ်လေးလည်း မင်း၊</p>
+                    <p>ရင်ခုန်တိုင်း သတိရမယ့်သူလည်း မင်း၊</p>
+                    <p>နောက်ဆုံးအချစ်လေးလည်း မင်းပဲ ဖြစ်ပေးမလား… ❤️</p>
                 </div>
 
                 <p>
@@ -176,7 +170,7 @@
                 <p>
                     ဒါကြောင့် အချစ်ဦးလေးရေ…<br>
                     အစ်ကို့ရဲ့ ဒီအချစ်လေးကို လက်ခံပေးပြီး<br>
-                    မင်းဘေးမှာ အစ်ကို့ကို ချစ်သူလေးအဖြစ်<br>
+                    ညီမဘေးမှာ အစ်ကို့ကို ချစ်သူလေးအဖြစ်<br>
                     နေခွင့်အမြန်ပေးပလား…? 🥺❤️
                 </p>
 
@@ -203,30 +197,7 @@
     </div>
 
     <script>
-        // 1. Counter Logic
-        function updateCounter() {
-            const startDate = new Date("2026-08-09T00:00:00");
-            const now = new Date();
-            const diff = now - startDate;
-
-            if (diff < 0) {
-                document.getElementById("counter").innerHTML = "စတင်မည့်ရက်ကို စောင့်ဆိုင်းနေပါသည်...";
-                return;
-            }
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const months = Math.floor(days / 30);
-            const years = Math.floor(months / 12);
-
-            const remainingMonths = months % 12;
-            const remainingDays = days % 30;
-
-            document.getElementById("counter").innerHTML = `${years} နှစ်၊ ${remainingMonths} လ၊ ${remainingDays} ရက်`;
-        }
-        updateCounter();
-        setInterval(updateCounter, 1000 * 60 * 60);
-
-        // 2. Hearts Floating Animation
+        // 1. Hearts Floating Animation
         function createHeart() {
             const container = document.getElementById('hearts-container');
             const heart = document.createElement('div');
@@ -243,7 +214,7 @@
         setInterval(createHeart, 400);
         function burstHearts() { for (let i = 0; i < 25; i++) { setTimeout(createHeart, i * 40); } }
 
-        // 3. Audio Control
+        // 2. Audio Control
         const music = document.getElementById('bg-music');
         const musicIcon = document.getElementById('music-icon');
         let isPlaying = false;
@@ -264,7 +235,7 @@
             if (!isPlaying) { toggleMusic(); }
         }, { once: true });
 
-        // 4. Pop-up Controls
+        // 3. Pop-up Controls
         function openLovePopup() {
             const popup = document.getElementById('love-popup');
             const content = document.getElementById('popup-content');
@@ -285,12 +256,12 @@
             setTimeout(() => { popup.classList.add('hidden'); }, 300);
         }
 
-        // 5. Telegram Integration
+        // 4. Telegram Integration
         function acceptLove() {
             burstHearts();
 
             const urlParams = new URLSearchParams(window.location.search);
-            const visitorName = urlParams.get('name') || "အိဇင်ဖြူ";
+            const visitorName = urlParams.get('name') || "အချစ်ဦးလေး";
 
             const now = new Date();
             const dateStr = now.toLocaleDateString('my-MM', { year: 'numeric', month: 'long', day: 'numeric' });
